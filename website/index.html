@@ -6,6 +6,9 @@
         <title>kerr sim - black hole raytracer</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
@@ -39,31 +42,50 @@
                 <p class="text">
                     Spinning black holes are likely to make up most of the astrophysical black holes in the universe. 
                     These spinning black holes are represented by the Kerr metric, discovered by Roy Kerr in 1963. This simulation uses
-                    The Kerr metric in Kerr-Schild coordinates in natural units. Represented by:
-                    *Insert The equation in here idk how to use LaTeX in html*
+                    The Kerr metric in Kerr-Schild coordinates in natural units:
+                </p>
+                <div class="equation-block">
+                    <!-- equation goes here in latex -->
+                    
+                </div>
+                <p class="text">
                     This equation represents how the worldline (path through spacetime) of matter or light is affected
                     by spinning mass. 
+                </p>
 
+                <h3>Photon initialization and integration</h3>
+                <p class="text">
                     The following simulation is composed by initializing every stage pixel as a photon from a ZAMO (zero angular
                     momentum observer) and taking a locally minkowski, or flat, spacetime to seed the initial conditions of an rk4 
                     integrator. the integrand is taken as a state 8 - vector comprised of the 4-velocity and the covariant 4-momentum,
                     also known as the phase space. And colourized using the final position of the photon over the affine permater lambda.
-
+                </p>
+                <h3>Prograde-only orbits</h3>
+                <p class="text">
                     Photon oribts are considered for only prograde motion. Superimposing prograde and retrograde orbits would not give 
                     visible difference on the accretion disc as the prograde orbits extend closer to the shadow than the retrograde
                     orbits. 
+                </p>
 
+                <h3>Accretion disc model</h3>
+                <p class="text">
                     Disc mechanics use Bardeen, Press, Teukolsky (1973) for the inner extent of the disc and the Energy as well as angular
                     Momentum functions. Remembering that E & L are conserved via Killing fields in Kerr spacetime. The E & L equations are used
                     in deriving the flux - energy profile for the accretion disc using Novikov & Thorne (1973) model. The colour science 
                     is then done across the disc in a nodular approach using Wyman, Sloan & Shirley, (2013) with CIE (2004). 
+                </p>
 
+                <h3>Redshift and Doppler beaming</h3>
+                <p class="text">
                     Redhsifting is calculated by dividing observed frequency by emitted frequency, which also factors doppler beaming in 
                     Kerr spacetime, giving the excellent brightspots and darker spots expected of orbiting disc material.
+                </p>
 
+                <h3>Starfield and the Einstein ring</h3>
+                <p class="text">
                     Background starfield is textured against the HYG database starfield using normalized escape directions of photons 
                     bypassing the black hole. This method produces the Einstein ring excellently well.
-        
+                </p>
             
                 </p>
 
@@ -162,5 +184,16 @@
                 <a href="https://github.com/carjorobinson03-cloud/Kerr-Sim">github.com/carjorobinson03-cloud/Kerr-Sim</a>
             </div>
         </footer>
-    </body>    
+    </body> 
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+          renderMathInElement(document.body, {
+            delimiters: [
+              {left: "$$", right: "$$", display: true},
+              {left: "$", right: "$", display: false}
+            ]
+          });
+        });
+      </script>
 </html>
