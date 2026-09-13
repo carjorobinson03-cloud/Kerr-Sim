@@ -42,7 +42,7 @@
                 <p class="text">
                     Spinning black holes are likely to make up most of the astrophysical black holes in the universe. 
                     These spinning black holes are represented by the Kerr metric, discovered by Roy Kerr in 1963. This simulation uses
-                    The Kerr metric in Kerr-Schild coordinates in natural units:
+                    the Kerr metric in Kerr-Schild coordinates, in natural units:
                 </p>
                 <div class="equation-block">
                     <!-- equation goes here in latex -->
@@ -50,50 +50,65 @@
                 </div>
                 <p class="text">
                     This equation represents how the worldline (path through spacetime) of matter or light is affected
-                    by spinning mass. 
+                    by a spinning mass. 
                 </p>
 
                 <h3>Photon initialization and integration</h3>
                 <p class="text">
-                    The following simulation is composed by initializing every stage pixel as a photon from a ZAMO (zero angular
-                    momentum observer) and taking a locally minkowski, or flat, spacetime to seed the initial conditions of an rk4 
-                    integrator. the integrand is taken as a state 8 - vector comprised of the 4-velocity and the covariant 4-momentum,
-                    also known as the phase space. And colourized using the final position of the photon over the affine permater lambda.
+                    The simulation is composed by initializing every screen pixel as a photon from a ZAMO (zero angular
+                    momentum observer), and taking a locally Minkowski, or flat, spacetime to seed the initial conditions of an RK4 
+                    integrator. The integrand is taken as a state 8-vector comprised of the 4-velocity and the covariant 4-momentum,
+                    also known as the phase space, and colourized using the final position of the photon over the affine parameter lambda.
                 </p>
                 <h3>Prograde-only orbits</h3>
                 <p class="text">
-                    Photon oribts are considered for only prograde motion. Superimposing prograde and retrograde orbits would not give 
+                    Photon orbits are considered for only prograde motion. Superimposing prograde and retrograde orbits would not give a
                     visible difference on the accretion disc as the prograde orbits extend closer to the shadow than the retrograde
                     orbits. 
                 </p>
 
                 <h3>Accretion disc model</h3>
                 <p class="text">
-                    Disc mechanics use Bardeen, Press, Teukolsky (1973) for the inner extent of the disc and the Energy as well as angular
-                    Momentum functions. Remembering that E & L are conserved via Killing fields in Kerr spacetime. The E & L equations are used
-                    in deriving the flux - energy profile for the accretion disc using Novikov & Thorne (1973) model. The colour science 
-                    is then done across the disc in a nodular approach using Wyman, Sloan & Shirley, (2013) with CIE (2004). 
+                    Disc mechanics use Bardeen, Press, and Teukolsky (1973) for the inner extent of the disc and the energy, as well as the angular
+                    momentum functions remembering that E & L are conserved via Killing fields in Kerr spacetime. The E & L equations are used
+                    in deriving the flux-energy profile for the accretion disc using the Novikov and Thorne (1973) model. The colour science 
+                    is then done across the disc using a nodular approach, following Wyman, Sloan and Shirley (2013), with CIE (2004). 
                 </p>
 
                 <h3>Redshift and Doppler beaming</h3>
                 <p class="text">
-                    Redhsifting is calculated by dividing observed frequency by emitted frequency, which also factors doppler beaming in 
-                    Kerr spacetime, giving the excellent brightspots and darker spots expected of orbiting disc material.
+                    Redshifting is calculated by dividing observed frequency by emitted frequency, which also factors in Doppler beaming in 
+                    Kerr spacetime, giving the excellent bright and dark spots expected of orbiting disc material.
                 </p>
 
                 <h3>Starfield and the Einstein ring</h3>
                 <p class="text">
-                    Background starfield is textured against the HYG database starfield using normalized escape directions of photons 
-                    bypassing the black hole. This method produces the Einstein ring excellently well.
+                    The background starfield is textured against the HYG database starfield using the normalized escape directions of photons 
+                    bypassing the black hole. This method reproduces the Einstein ring excellently well.
                 </p>
             
-                </p>
+                <br>
+                <br>
 
-                <h3>How it runs</h3>
-                    <p class="text">
-                        
-                    </p>
-                </div>
+                <h2>How it runs</h2>
+                <p class="text">
+                    All of the above runs live in a GLSL fragment shader, per pixel, every frame. The whole render is one full-screen triangle with no actual vertex data,
+                    so the shader is really just running independently on every pixel at once, each one tracing its own photon backward from the camera through the
+                    RK4 loop described above.
+                </p>
+                <p class="text">
+                    Running a few thousand RK4 steps per pixel at full resolution in real time isn't cheap, so the step size is adaptive, taking larger steps once a
+                    photon is far enough from the hole that curvature barely matters, and every ray gives up after a fixed number of steps if it hasn't resolved.
+                </p>
+                <p class="text">
+                    The disc's temperature curve and the blackbody colour curve aren't solved per pixel either. They're built once on the CPU and uploaded as small lookup textures, 
+                    and only rebuilt when spin or peak temperature actually change, not every frame. This is what allows the sliders to feel responsive instead of lagging.
+                </p>
+                <p class="text">
+                    Everything interactive sits outside the shader entirely. Camera orbit and zoom are recomputed from mouse and scroll input each
+                    frame using basic trigonometry, and the on-screen controls are a separate UI layer drawn over top, reading and writing the same
+                    values the shader takes in as uniforms.
+                </p>
             </div>
         </section>
 
