@@ -45,13 +45,24 @@
                     the Kerr metric in Kerr-Schild coordinates, in natural units:
                 </p>
                 <div class="equation-block">
-                    <!-- equation goes here in latex -->
-                    
+                    $$
+                    \begin{align*}
+                    g_{\mu\nu} &= \eta_{\mu\nu} + f\, \ell_\mu \ell_\nu \\[4pt]
+                    f &= \frac{2 M r^3}{r^4 + a^2 z^2} \\[4pt]
+                    \ell_\mu &= \left( 1,\; \frac{r x + a y}{r^2 + a^2},\; \frac{r y - a x}{r^2 + a^2},\; \frac{z}{r} \right) \\[4pt]
+                    \end{align*}
+                    $$
+
                 </div>
                 <p class="text">
-                    This equation represents how the worldline (path through spacetime) of matter or light is affected
-                    by a spinning mass. 
+                    This equation represents the metric tensor of the kerr-schild spacetime. The line element is taken
+                    for the worldine of particles in relativity:
                 </p>
+                <div class="equation-block">
+                    $$
+                    ds^2 = g_{\mu\nu}\, dx^\mu\, dx^\nu
+                    $$
+                </div>
 
                 <h3>Photon initialization and integration</h3>
                 <p class="text">
