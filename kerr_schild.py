@@ -692,6 +692,23 @@ def r_ph(M_val, a_val, prograde=True):
     s = -1.0 if prograde else 1.0
     return 2.0 * M_val * (1.0 + math.cos((2.0/3.0) * math.acos(s * a_val / M_val)))
 
+#Inserting a one time bake for web support. (the trapezoidal integrals have been a monkey wrench)
+
+if not os.path.exists("temp_2d.bin"):
+    a_grid = np.linspace(0.0, 0.998, 64)
+    lut_2d = []
+    disc_ins = []
+
+    for a_val in a_grid:
+        disc_in = r_ISCO_prograde(1.0, a_val)
+        r_grid = np.linspace(disc_in, 20.0, 1024)
+        F_tilda = Flux_funcr(r_grid, 1.0, a_val, 1.00)
+        T_r = (F_tilda / F_tilda.max())**(1/4)   
+        lut_2d.append(T_r.astype(np.float32))
+    
+    np.array(lut_2d).tofile("temp_2d.bin") 
+    print("2d LUT Saved")
+
 def rebuild_disc_temperature(tex_disc, M_val, a_val, T_peak):
     disc_in = r_ISCO_prograde(M_val, a_val)
     N_r = 1024
@@ -813,7 +830,7 @@ def main():
     sky = np.load("starfield.npy")
     sky = np.ascontiguousarray(sky, np.float32)    # GL needs contiguous row-major bytes
     texH, texW = sky.shape[:2]
-
+    
     starTex = glGenTextures(1)
     glBindTexture(GL_TEXTURE_2D, starTex)
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB32F, texW, texH, 0, GL_RGB, GL_FLOAT, sky)

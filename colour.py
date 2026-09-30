@@ -1,5 +1,10 @@
 import numpy as np
+import os
 from scipy.integrate import cumulative_trapezoid
+
+
+if not os.path.exists("bbtorgb.bin"):
+    print("Baking Color Binary (One time)...")
 
 def Flux_funcr(r_n, M_val, a_val, scale):
     """
@@ -67,3 +72,13 @@ def bb_to_rgb(T):
     rgb = np.clip(rgb, 0, None) #kill negatives
     rgb = rgb / max(rgb.max(), 1e-9) #normalize for brightest channel
     return rgb
+
+
+T_LUT_MIN = 1000.0
+T_LUT_MAX = 20000.0
+T_LUT_N = 1024
+T_grid = np.linspace(T_LUT_MIN, T_LUT_MAX, T_LUT_N)
+blackbodtoRGB = np.array([bb_to_rgb(T) for T in T_grid], dtype=np.float32)
+
+blackbodtoRGB.tofile("bbtorgb.bin")
+print("colour baked")
