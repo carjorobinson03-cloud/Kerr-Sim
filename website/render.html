@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Kerr Black Hole Simulation</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <nav>
+            <div class="wrap">
+                <a class="nav-mark" href="index.html" style="text-decoration:none">kerr-sim</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">← Back to overview</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <main class="render-page">
+            <div class="wrap wrap--wide">
+                <div class="render-frame">
+                    <canvas id="view"></canvas>
+                </div>
+
+                <p class="render-credit">
+                    Star positions and magnitudes from the
+                    <a href="https://github.com/astronexus/HYG-Database" target="_blank" rel="noopener">HYG Database</a>
+                    by David Nash, licensed under
+                    <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>;
+                    adapted for this render. Built by Carter Robinson & Daniella Toth.
+                </p>
+            </div>
+        </main>
+
+        <script type="module" src="main.js"></script>
+    </body>
+</html>

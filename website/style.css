@@ -121,6 +121,64 @@ h1{
     font-size:1.0625rem;
     color:var(--light-grey);
 }
+/*Cheap Wrapper Changes */
+.render-btn{
+    position:absolute;
+    right:28px;                 
+    bottom:4rem;                
+
+    display:inline-flex;
+    align-items:center;
+    gap:0.75rem;
+    padding:0.95rem 1.6rem;
+
+    font-family:var(--sans);
+    font-size:0.95rem;
+    font-weight:500;
+    letter-spacing:0.02em;
+    line-height:1;
+    color:var(--white);
+    text-decoration:none;
+
+    background:rgba(240, 238, 232, 0.04);
+    border:1px solid rgba(240, 238, 232, 0.18);
+    border-radius:999px;
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+
+    transition:border-color 0.25s ease, background 0.25s ease,
+               box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.render-btn__arrow{
+    transition:transform 0.25s ease;
+}
+
+.render-btn:hover,
+.render-btn:focus-visible{
+    border-color:color-mix(in srgb, var(--orange) 75%, transparent);
+    background:color-mix(in srgb, var(--orange) 10%, transparent);
+    box-shadow:0 0 28px color-mix(in srgb, var(--orange) 28%, transparent),
+               inset 0 0 12px color-mix(in srgb, var(--orange) 12%, transparent);
+    transform:translateY(-2px);
+}
+
+.render-btn:hover .render-btn__arrow,
+.render-btn:focus-visible .render-btn__arrow{
+    transform:translateX(4px);
+}
+
+.render-btn:focus-visible{
+    outline:2px solid var(--orange);
+    outline-offset:4px;
+}
+
+@media (max-width:700px){
+    .render-btn{
+        position:static;
+        margin-top:2rem;
+    }
+}
 
 section{
     padding:5.5rem 0;
@@ -267,4 +325,49 @@ footer a:hover{
     text-align: center;
     color: var(--white);
     max-width: 85ch;
+}
+/*Cheap Wrapper Changes */
+.wrap--wide{
+    max-width:1260px;
+}
+
+.render-page{
+    padding:2rem 0 3rem;
+}
+
+.render-frame{
+    width:100%;
+    aspect-ratio:16 / 9;
+    max-height:calc(100vh - 56px - 8rem);   
+    margin:0 auto;
+    border:1px solid var(--line);
+    border-radius:6px;
+    overflow:hidden;
+    background:#000;
+}
+
+.render-frame canvas{
+    display:block;
+    width:100%;
+    height:100%;
+}
+
+.render-credit{
+    margin-top:1rem;
+    max-width:85ch;
+    font-size:0.8125rem;
+    line-height:1.6;
+    color:var(--dark-grey);
+}
+
+.render-credit a{
+    color:var(--light-grey);
+    text-decoration:none;
+    border-bottom:1px solid var(--line);
+    transition:color 0.15s, border-color 0.15s;
+}
+
+.render-credit a:hover{
+    color:var(--orange);
+    border-color:var(--orange);
 }

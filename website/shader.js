@@ -3,7 +3,7 @@ export const FRAG_SRC = `#version 300 es
 
 
 precision highp float;
-precision highp sampler2D;
+precision mediump sampler2D;
 
 uniform float cam_x;
 uniform float cam_y;

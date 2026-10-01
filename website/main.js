@@ -10,9 +10,22 @@ void main() {
 }`;
 
 const canvas = document.getElementById('view');
+
+//lad fix test
+const RENDER_WIDTH = 1260;
+const RENDER_HEIGHT = Math.round(RENDER_WIDTH * 9 /16);
+function resize() {
+    //const dpr = Math.min(window.devicePixelRatio, 2);
+    //canvas.width  = canvas.clientWidth  * dpr;
+    //canvas.height = canvas.clientHeight * dpr;
+    canvas.width = RENDER_WIDTH;
+    canvas.height = RENDER_HEIGHT;
+}
+new ResizeObserver(resize).observe(canvas);
+resize();
 const gl = canvas.getContext('webgl2');
 
-const starfield = new Float32Array(await fetch('starfield.bin').then(r => r.arrayBuffer()));
+const starfield = new Float32Array(await fetch('starfield2.bin').then(r => r.arrayBuffer()));
 const bbtorgb = new Float32Array(await fetch('bbtorgb.bin').then(r => r.arrayBuffer()));
 const disctemp = new Float32Array(await fetch('temp_2d.bin').then(r => r.arrayBuffer()));
 
@@ -107,6 +120,7 @@ function main() {
     gl.drawArrays(gl.TRIANGLES, 0, 3);
     requestAnimationFrame(main);
 }
+
 
 requestAnimationFrame(main);
 
