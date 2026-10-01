@@ -141,24 +141,46 @@
                 <div class="log-entry">
                     <div class="log-date">Phase 1</div>
                     <div>
-                        <h3>title</h3>
-                        <p class="text">description</p>
+                        <h3>Physics Calculations</h3>
+                        <p class="text">Project began with inspiration from Interstellar and other forms of media.
+                            Carter is graduated with a minor in astrophysics, and had recently taken AMATH475 at the university of Waterloo,
+                            So he was mainly responsible for the physics. This included deriving the null geodesics for Kerr spacetime, a dubious task.
+                            He followed the (ironically named) Carter ansatz to solve the mino time-parametrized null geodesics. These equations contain sqrt functions which cause discontinuities and ultimately did not work.
+                            The next method was to take the phase space or Hamiltonian of the system and march it forwards with respect to time (affine parameter). This did in fact work. 
+                            Once all the equations for the hamiltonian state vector were satisfied (4 position and covariant 4 momentum) the render was ready to be used.
+                            This first working render was in boyer lindquist coordinates however, and oblate spheroids are measured with sin and phi angles.
+                            And so there was issues dividing by sin functions causing a large amount of NaN's and a large seam running through the image at the poles.
+                            Alas the first render was complete.
+                        
+                        </p>
                     </div>
                 </div>
               
                 <div class="log-entry">
                     <div class="log-date">Phase 2</div>
                     <div>
-                        <h3>title</h3>
-                        <p class="text">description</p>
+                        <h3>Refinement</h3>
+                        <p class="text">Here was where the build took shape as an actual black hole render. Taking the research result for flux profiles
+                            of an accretion disc in kerr spacetime to apply a rgb model across the disc. Then adapting the HYG star database to the background. These two textures followed 
+                            lookup table texturing instead of direct computation, saving some efficiency. The next, and incredibly tricky step was switching to 
+                            kerr-schild coordinates. The hamiltonian calculations simplified a little bit, but the camera position was a ZAMO, and finding the orthonormal
+                            basis for the ZAMO required a tricky gram-schmidt process to solve. Fortunately though, the port to kerr-schild allowed the radius function
+                            to survive and this the lookup tables were intact. The stepping was also changed on the rk4 integrator to allow larger steps outside critical
+                            areas and save lots of efficiency.
+                        </p>
                     </div>
                 </div>
               
                 <div class="log-entry">
                     <div class="log-date">Phase 3</div>
                     <div>
-                        <h3>title</h3>
-                        <p class="text">description</p>
+                        <h3>Presentation</h3>
+                        <p class="text">This stage in the project is when Daniella took over most of the development. Being a software engineering student at the 
+                            University of Guelph it was a good match. She built the GUI in python, which allowed for orbiting the black hole. As well as
+                            adding spin and temperature sliders to alter the appearance of the black hole as the viewer wishes. She also built the html and css for which this 
+                            website runs (and looks so nice). She then researched the methods to converting the render to a web viewer, which we have now integrated.
+                            Finally, is the comparison to literature, to deem if this black hole render is truly up to par.
+                        </p>
                     </div>
                 </div>
             </div>
