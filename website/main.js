@@ -99,8 +99,9 @@ canvas.addEventListener('pointermove', e => {
 });
 
 canvas.addEventListener('wheel', e=> {
+    e.preventDefault()
     r_cam = Math.max(8, Math.min(50, r_cam + e.deltaY * 0.05));
-});
+}, { passive: false });
 
 const gui = new GUI({ container: document.getElementById('controls') });
 gui.add(physParams,'a', 0, 0.998).name('Spin (a)');
