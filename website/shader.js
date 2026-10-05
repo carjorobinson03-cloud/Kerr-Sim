@@ -3,7 +3,7 @@ export const FRAG_SRC = `#version 300 es
 
 
 precision highp float;
-precision mediump sampler2D;
+precision highp sampler2D;
 
 uniform float cam_x;
 uniform float cam_y;
@@ -15,7 +15,7 @@ uniform vec2 resolution;
 uniform float DISC_IN;
 const int   MAX_STEPS = 2500; 
 const float H_STEP = 0.1;
-const float R_ESCAPE = 60.0;
+const float R_ESCAPE = 71.0;
 const float DISC_OUT = 20.0;
 uniform sampler2D discTemp;
 uniform sampler2D bbColor;

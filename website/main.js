@@ -89,8 +89,8 @@ gl.uniform2f(U('aRange'), 0.0, 0.998); //Clipped like this to avoid LUT binary f
 
 //GUI init
 
-let phi_camera = Math.PI / 6, theta_camera = 85*Math.PI / 180, r_cam = 50.0; //Matching Python side.
-const physParams = { a: 0.0, T_peak: 4000 };
+let phi_camera = Math.PI / 6, theta_camera = 85*Math.PI / 180, r_cam = 70.0; //Matching Python side.
+const physParams = { a: 0.5, T_peak: 4000 };
 
 canvas.addEventListener('pointermove', e => {
     if (e.buttons !== 1) return;
