@@ -89,13 +89,47 @@ gl.uniform2f(U('aRange'), 0.0, 0.998); //Clipped like this to avoid LUT binary f
 
 //GUI init
 
-let phi_camera = Math.PI / 6, theta_camera = 85*Math.PI / 180, r_cam = 70.0; //Matching Python side.
+let phi_camera = Math.PI / 6, theta_camera = 85*Math.PI / 180, r_cam = 70.0; 
 const physParams = { a: 0.5, T_peak: 4000 };
 
+const pointers = new Map();   
+let lastPinch = 0;           
+
+canvas.addEventListener('pointerdown', e => {
+    canvas.setPointerCapture(e.pointerId);
+    pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    lastPinch = 0;            
+});
+
+function endPointer(e) {
+    pointers.delete(e.pointerId);
+    lastPinch = 0;
+}
+canvas.addEventListener('pointerup', endPointer);
+canvas.addEventListener('pointercancel', endPointer);
+
 canvas.addEventListener('pointermove', e => {
-    if (e.buttons !== 1) return;
-    phi_camera += e.movementX * 0.005;
-    theta_camera = Math.max(0.05, Math.min(Math.PI - 0.05, theta_camera - e.movementY * 0.005));
+    const p = pointers.get(e.pointerId);
+    if (!p) return;                       
+
+    const dx = e.clientX - p.x;           
+    const dy = e.clientY - p.y;
+    p.x = e.clientX;
+    p.y = e.clientY;
+
+    if (pointers.size === 1) {
+        // one finger: rotate
+        phi_camera += dx * 0.005;
+        theta_camera = Math.max(0.05, Math.min(Math.PI - 0.05, theta_camera - dy * 0.005));
+    } else if (pointers.size === 2) {
+        // two fingers: zoom
+        const [a, b] = [...pointers.values()];
+        const dist = Math.hypot(a.x - b.x, a.y - b.y);
+        if (lastPinch) {
+            r_cam = Math.max(8, Math.min(50, r_cam - (dist - lastPinch) * 0.1));
+        }
+        lastPinch = dist;
+    }
 });
 
 canvas.addEventListener('wheel', e=> {
