@@ -63,6 +63,7 @@ function rISCO(a) {
     return 3.0 + Z2 - Math.sqrt((3.0 - Z1) * (3.0 + Z1 + 2.0*Z2));
 }
 
+await new Promise(r => requestAnimationFrame(() => setTimeout(r, 0))); //Spinner freezeout stall
 const program = gl.createProgram();
 gl.attachShader(program, compile(VERT_SRC, gl.VERTEX_SHADER)); //Possible error source from mismatching arg calls.
 gl.attachShader(program, compile(FRAG_SRC, gl.FRAGMENT_SHADER));
@@ -101,7 +102,7 @@ canvas.addEventListener('wheel', e=> {
     r_cam = Math.max(8, Math.min(50, r_cam + e.deltaY * 0.05));
 });
 
-const gui = new GUI();
+const gui = new GUI({ container: document.getElementById('controls') });
 gui.add(physParams,'a', 0, 0.998).name('Spin (a)');
 gui.add(physParams,'T_peak', 1000, 20000).name('Peak temp (K)');
 

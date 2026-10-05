@@ -347,6 +347,12 @@ footer a:hover{
     background:#000;
 }
 
+#controls {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+}
+
 .render-loading {
     position: absolute;
     inset: 0;
