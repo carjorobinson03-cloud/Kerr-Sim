@@ -11,6 +11,12 @@ void main() {
 
 const canvas = document.getElementById('view');
 
+// loading overlay
+const loading = document.getElementById('loading');
+const loadingText = document.getElementById('loading-text');
+const setStatus = (msg) => { loadingText.textContent = msg; };
+const hideLoading = () => loading.classList.add('done');
+
 //lad fix test
 const RENDER_WIDTH = 1260;
 const RENDER_HEIGHT = Math.round(RENDER_WIDTH * 9 /16);
@@ -56,7 +62,6 @@ function rISCO(a) {
     const Z2 = Math.sqrt(3.0*a*a + Z1*Z1);
     return 3.0 + Z2 - Math.sqrt((3.0 - Z1) * (3.0 + Z1 + 2.0*Z2));
 }
-//do not need r_ISCO_prograde because all the python functions are being used to construct binary bake LUTs
 
 const program = gl.createProgram();
 gl.attachShader(program, compile(VERT_SRC, gl.VERTEX_SHADER)); //Possible error source from mismatching arg calls.
@@ -118,6 +123,7 @@ function main() {
     gl.uniform2f(U('resolution'), canvas.width, canvas.height);
 
     gl.drawArrays(gl.TRIANGLES, 0, 3);
+    hideLoading();
     requestAnimationFrame(main);
 }
 

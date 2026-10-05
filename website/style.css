@@ -336,6 +336,7 @@ footer a:hover{
 }
 
 .render-frame{
+    position: relative;
     width:100%;
     aspect-ratio:16 / 9;
     max-height:calc(100dvh - 56px - 8rem);   
@@ -345,6 +346,28 @@ footer a:hover{
     overflow:hidden;
     background:#000;
 }
+
+.render-loading {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    background: #000;
+    transition: opacity 0.6s;
+}
+.render-loading.done { opacity: 0; pointer-events: none; }
+
+.spinner {
+    width: 40px; height: 40px;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
 
 .render-frame canvas{
     display:block;
