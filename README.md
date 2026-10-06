@@ -22,7 +22,6 @@ as physical as possible; all varied parameters are in natural units.
 - R. P. Kerr, "Gravitational Field of a Spinning Mass as an Example of Algebraically Special Metrics," *Phys. Rev. Lett.* **11**, 237–238 (1963). [doi:10.1103/PhysRevLett.11.237](https://doi.org/10.1103/PhysRevLett.11.237)
 - R. P. Kerr & A. Schild, "Some Algebraically Degenerate Solutions of Einstein's Gravitational Field Equations," *Proc. Symp. Appl. Math.* **17**, 199 (1965). — Kerr–Schild form; basis for the Cartesian KS chart used here.
 - J. M. Bardeen, W. H. Press & S. A. Teukolsky, "Rotating Black Holes: Locally Nonrotating Frames, Energy Extraction, and Scalar Synchrotron Radiation," *ApJ* **178**, 347–370 (1972). [doi:10.1086/151796](https://doi.org/10.1086/151796) — ZAMO frames; circular-geodesic `E(r)`, `L(r)`, `Ω(r)`; ISCO.
-- J. M. Bardeen, "Timelike and Null Geodesics in the Kerr Metric," in *Black Holes (Les Astres Occlus)*, eds. C. DeWitt & B. S. DeWitt (Gordon & Breach, 1973), pp. 215–239. — analytic shadow silhouette used as the geometry validation gate.
 - C. W. Misner, K. S. Thorne & J. A. Wheeler, *Gravitation* (W. H. Freeman, 1973).
 
 ### Accretion disc model
@@ -40,3 +39,5 @@ as physical as possible; all varied parameters are in natural units.
 ### Data
 
 - **HYG Database v4.1** — D. Nash / astronexus. <https://github.com/astronexus/HYG-Database> — 119,625 stars; equatorial Cartesian positions, V magnitude, B−V.
+
+- **First M87 Event Horizon Telescope Results. VI. The Shadow and Mass of the Central Black Hole** — The Event Horizon Telescope Collaboration (2019), ApJ 875, L6. <https://arxiv.org/abs/1906.11243> — GM/Dc² = 3.8 ± 0.4 µas, distance 16.8 Mpc, mass 6.5 × 10⁹ M☉; source of the µas scale used in the EHT comparison.
