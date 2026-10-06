@@ -56,6 +56,7 @@ uniform float T_LUT_MAX;
 uniform float exposure;
 uniform float T_peak;
 uniform sampler2D starfield;
+uniform int linear_out; //Anything to do with this function is linearizing the photo for analysis
 
 
 struct state{
@@ -635,14 +636,18 @@ void main() {
         else if (r > R_ESCAPE) {
             //float x, float y, float z, float p_t, float p_x, float p_y, float p_z
             vec3 dir = escapedir(x, y, z, p_t, p_x, p_y, p_z);  
-            color = texture(starfield, dirToUV(dir)).rgb * 250.0;
+            color = (linear_out == 1) ? vec3(0.0) : texture(starfield, dirToUV(dir)).rgb * 250.0;
             done = true;
         }
     }
       
     //  ran out of steps without resolving 
     if (!done) {
-        color = vec3(0.0, 1.0, 0.0);   // bright green = "MAX_STEPS hit", debug only
+    color = (linear_out == 1) ? vec3(0.0) : vec3(0.0, 1.0, 0.0);
+    }
+    if (linear_out == 1) {
+        fragColor = vec4(color, 1.0);
+        return;
     }
     // luminance Reinhard (preserves hue) -> sRGB
     float Lum = dot(color, vec3(0.2126, 0.7152, 0.0722));
@@ -731,17 +736,36 @@ def scroll_callback(window, xoffset, yoffset):
     r_camera -= yoffset * zoom_speed
     r_camera = max(8.0, min(50.0, r_camera))
 
+def render_linear(loc, vao, w, h):
+    glActiveTexture(GL_TEXTURE7)  # keep units 0-2 intact
+    tex = glGenTextures(1)
+    glBindTexture(GL_TEXTURE_2D, tex)
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, w, h, 0, GL_RGBA, GL_FLOAT, None)
+    fbo = glGenFramebuffers(1)
+    glBindFramebuffer(GL_FRAMEBUFFER, fbo)
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex, 0)
+    glUniform1i(loc("linear_out"), 1)
+    glBindVertexArray(vao)
+    glDrawArrays(GL_TRIANGLES, 0, 3)
+    glFinish()
+    px = np.asarray(glReadPixels(0, 0, w, h, GL_RGBA, GL_FLOAT), dtype=np.float32).reshape(h, w, 4)
+    glUniform1i(loc("linear_out"), 0)
+    glBindFramebuffer(GL_FRAMEBUFFER, 0)
+    glDeleteFramebuffers(1, [fbo])
+    glDeleteTextures([tex])
+    return px[..., :3] @ np.array([0.2126, 0.7152, 0.0722], dtype=np.float32)
+
 def main():
     global r_camera
     #physical parameters, update these and image & physics changes.
     M_val = 1.0
-    a_val = 0.0
+    a_val = 0.9
     #r_camera = 50.0
-    fov_deg = 40.0
-    theta_camera = math.radians(85.0)   # just above the equatorial plane
+    fov_deg = 25.0
+    theta_camera = math.radians(163.0)   # just above the equatorial plane
     phi_camera  = math.radians(30.0)
-    T_peak = 14000.0 
-    WIDTH, HEIGHT = 720, 480
+    T_peak = 3000.0 
+    WIDTH, HEIGHT = 600, 600
 
     if not glfw.init():
         raise RuntimeError("glfw init failed")
@@ -876,7 +900,7 @@ def main():
     glUniform1i(loc("bbColor"),  1)  
     glUniform1f(loc("T_LUT_MIN"), T_LUT_MIN)
     glUniform1f(loc("T_LUT_MAX"), T_LUT_MAX)
-    glUniform1f(loc("exposure"), 1.2)   #1<n<4
+    glUniform1f(loc("exposure"), 4.0)   #1<n<4
     glUniform1f(loc("T_peak"), T_peak)  
     glUniform1i(loc("starfield"), 2) 
 
@@ -951,6 +975,12 @@ def main():
         glUniform1f(loc("cam_x"), cam_x)
         glUniform1f(loc("cam_y"), cam_y)
         glUniform1f(loc("cam_z"), cam_z)
+        if glfw.get_key(window, glfw.KEY_E) == glfw.PRESS:
+            lum = render_linear(loc, vao, fb_w, fb_h)
+            np.savez("render_linear.npz", lum=lum, r_cam=r_camera, fov=fov_deg,
+                    a=a_val, theta=math.degrees(theta_camera))
+            print("saved render_linear.npz", lum.shape, lum.max()) #Press "e" to activate a save of the linearized file.
+
         glBindVertexArray(vao)
         glDrawArrays(GL_TRIANGLES, 0, 3)
 
