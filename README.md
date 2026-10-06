@@ -1,17 +1,23 @@
 # Kerr-Black-Hole-Simulation
-Python and GLSL simulation of Kerr Black holes. 
+Python and GLSL source spinning black hole (kerr) render. Javascript webGL render for user interaction on Vercel linked website.
 
-<img src="assets/images/Maximal%20Spin,%20Mid%20Temp.png" width="700" alt="Maximal spin, medium temperature regime">
 
-<img src="assets/images/topdown2.png" width="700" alt="Top-down view, maximal spin">
+<img src="website/assets/herohole.png" width="700">
 
-<img src="assets/images/Swarzchild%20Collapse.png" width="700" alt="Schwarzschild collapse">
 
 Null geodesic integration via RK4 over an affine parameter. The integrator uses
 Kerr–Schild coordinates with a Boyer–Lindquist fallback, with geodesics
 initialized at the ZAMO position. Disc colouring uses a lookup table built from
 Planck's law, with the redshift factor applied. The goal was to keep the render
 as physical as possible; all varied parameters are in natural units.
+
+## Instructions For Use
+- Using python rendering: Clone the repository and ensure all necessary libaraies are installed. Begin by running the starfield.py file to save the bakcground texture. Then, the kerr_schild.py file can be ran with the interactive python side renders.
+
+- Using WebGL rendering: simply load the Vercel page and enter the render tab.
+
+- Using the validation code: Set the scene peramters in the kerr_schild.py file and press the "e" key, after which the linear_render.npz file should be saved. Ensure it is in the correct folder (with eht_compare) and then run eht_compare.py. It is designed to compare the render to similar conditions as the EHT images.
+
 
 
 
