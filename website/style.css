@@ -411,3 +411,34 @@ footer a:hover{
         height:70dvh;
     }
 }
+.compare-grid{
+    margin-top: 2.5rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr);
+    gap: 1.25rem;
+    align-items: start;
+}
+
+.compare-fig img{
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    border: 1px solid var(--line);
+}
+
+.compare-fig figcaption{
+    margin-top: 0.6rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    line-height: 1.5;
+    color: var(--dark-grey);
+}
+
+.compare-note{
+    margin-top: 1.5rem;
+}
+
+@media (max-width:640px){
+    .compare-grid{ grid-template-columns: 1fr; }
+}
