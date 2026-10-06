@@ -84,7 +84,7 @@ gl.uniform1f(U('M'), 1.0);
 gl.uniform1f(U('tanHalfFov'), Math.tan(0.5 * 40.0 * Math.PI / 180.0)); // may as well bring in here, never changes
 gl.uniform1f(U('T_LUT_MIN'), 1000.0);
 gl.uniform1f(U('T_LUT_MAX'), 20000.0);
-gl.uniform1f(U('exposure'), 1.2);
+gl.uniform1f(U('exposure'), 4.0);
 gl.uniform2f(U('aRange'), 0.0, 0.998); //Clipped like this to avoid LUT binary file overloading.
 
 //GUI init
