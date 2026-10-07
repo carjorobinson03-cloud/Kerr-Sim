@@ -12,11 +12,11 @@ Planck's law, with the redshift factor applied. The goal was to keep the render
 as physical as possible; all varied parameters are in natural units.
 
 ## Instructions For Use
-- Using python rendering: Clone the repository and ensure all necessary libaraies are installed. Begin by running the starfield.py file to save the bakcground texture. Then, the kerr_schild.py file can be ran with the interactive python side renders.
+- Using python rendering: Clone the repository and ensure all necessary libaraies are installed. Begin by running the Starfield.py file to save the background texture. Then, the kerr_schild.py file can be ran with the interactive python side renders.
 
 - Using WebGL rendering: simply load the Vercel page and enter the render tab.
 
-- Using the validation code: Set the scene peramters in the kerr_schild.py file and press the "e" key, after which the linear_render.npz file should be saved. Ensure it is in the correct folder (with eht_compare) and then run eht_compare.py. It is designed to compare the render to similar conditions as the EHT images.
+- Using the validation code: Set the scene parameters in the kerr_schild.py file and press the "e" key, after which the linear_render.npz file should be saved. Ensure it is in the correct folder (with eht_compare) and then run eht_compare.py. It is designed to compare the render to similar conditions as the EHT images.
 
 
 
@@ -46,4 +46,12 @@ as physical as possible; all varied parameters are in natural units.
 
 - **HYG Database v4.1** — D. Nash / astronexus. <https://github.com/astronexus/HYG-Database> — 119,625 stars; equatorial Cartesian positions, V magnitude, B−V.
 
+- **First M87 Event Horizon Telescope Results. I. The Shadow of the Supermassive Black Hole** — The Event Horizon Telescope Collaboration (2019), ApJ 875, L1. <https://arxiv.org/abs/1906.11238> — the M87* image and observing-day data shown in the comparison figure.
+
 - **First M87 Event Horizon Telescope Results. VI. The Shadow and Mass of the Central Black Hole** — The Event Horizon Telescope Collaboration (2019), ApJ 875, L6. <https://arxiv.org/abs/1906.11243> — GM/Dc² = 3.8 ± 0.4 µas, distance 16.8 Mpc, mass 6.5 × 10⁹ M☉; source of the µas scale used in the EHT comparison.
+
+## Licenses
+
+- **Code** (Python, GLSL, JavaScript, HTML/CSS): MIT License, see [LICENSE](LICENSE).
+- **Starfield data** (`website/starfield.bin`, `website/starfield2.bin`, and the generated `starfield.npy`): adapted from the [HYG Database v4.1](https://github.com/astronexus/HYG-Database) by David Nash, used under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Star positions, magnitudes and B−V colours were converted into an equirectangular RGB texture. These adapted data files are released under CC BY-SA 4.0 as well.
+- **Font** (`assets/fonts/Inter-Regular.ttf`): Inter, SIL Open Font License 1.1.
