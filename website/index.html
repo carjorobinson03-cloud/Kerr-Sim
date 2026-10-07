@@ -76,7 +76,7 @@
                 <p class="text">
                     The simulation is composed by initializing every screen pixel as a photon from a ZAMO (zero angular
                     momentum observer), and taking a locally Minkowski, or flat, spacetime to seed the initial conditions of an RK4 
-                    integrator. The integrand is taken as a state 8-vector comprised of the 4-velocity and the covariant 4-momentum,
+                    integrator. The integrand is taken as a state 8-vector comprised of the 4-positoin and the covariant 4-momentum,
                     also known as the phase space, and colourized using the final position of the photon over the affine parameter lambda.
                 </p>
                 <h3>Prograde-only orbits</h3>
@@ -103,7 +103,7 @@
                 <h3>Starfield and the Einstein ring</h3>
                 <p class="text">
                     The background starfield is textured against the HYG database starfield using the normalized escape directions of photons 
-                    bypassing the black hole. This method reproduces the Einstein ring excellently well.
+                    bypassing the black hole. This method reproduces the Einstein ring and associated lensing quite well.
                 </p>
             
                 <br>
@@ -199,26 +199,28 @@
                         <figure class="compare-fig">
                             <img src="assets/convul_match.png"
                                 alt="Left: linear-intensity render of a Kerr black hole and thin disc. Right: the same render blurred to 20 microarcsecond resolution, a crescent brighter on one side.">
-                            <figcaption>Our render, unblurred (left) and blurred to EHT resolution (right).</figcaption>
+                            <figcaption>Our render, unblurred <strong>(left)</strong> and blurred to EHT resolution <strong>(right)</strong>.</figcaption>
                         </figure>
                     </div>
 
                     <p class="text compare-note">
                         Left: the Event Horizon Telescope's image of M87*. Right: our render set up for M87*
                         (inclination about 17°, a representative spin of a = 0.9), at full resolution and blurred to the
-                        EHT's resolution of about 20 µas, with the angular scale from GM/Dc² = 3.8 µas. Done using SciPy's guassian convolution package. Both images produce the dark central
+                        EHT's resolution of about 20 µas, with the angular scale from GM/Dc² = 3.8 µas. Done using SciPy's guassian convolution package. 
+                    </p>
+                    <p class="text compare-note">Both images produce the dark central
                         region expected of a black hole shadow. Both show the orbiting material being much brighter at the side of rotation, but the
                         EHT image displays the bright spot in a different location. Space has no preffered direction so this is just a positional mismatch.
                         The temperature of the hot plasma orbiting M87* is significantly hotter than the peak temperature of the comparison render, which takes
                         a peak temperature of 3000K. This is likely due to the fact that the disc material in the render is volumetrically thin and can be cooler to emit
                         colours of similar blackbody emission. Largely, discrepancies in shape can be due to the fact that the plasma orbiting M87* 
                         is a volume of space and it is not a 2-dimensional render as is the case with our image, so perfections in shape are unlikely.
-                        The render seems to hold a respectable similarity to M87* (Qualitatively). And we are quite happy with the results.
-                    </p>
+                        The render seems to hold a respectable similarity to M87* (Qualitatively). And we are quite happy with the results.</p> 
+
                     <h3>Our render has the following limitations:</h3>
                     <p class="text">
-                        The disc gas is assued to be optically thin. There is assumed no other massive objects near the
-                        Kerr black hole (Vacuum). The disc gas is assumed to uniform and have consistent density across.
+                        The disc gas is assumed to be thin. There is assumed no other massive objects near the
+                        Kerr black hole (Vacuum). The disc gas is assumed to uniform and have constant density across.
                         The outer edge of the accretion disc is an arbitrary choice at r = 20.0M. The render only works with co-rotating (prograde)
                         gas. The disc sits in the equatorial plane. And the disc has no self lensing. Bright spots produced in M87* comparison
                         are not always visible in actual render due to sRGB encoding and Luminance Reinhard, processes that computer graphics benefit from.
