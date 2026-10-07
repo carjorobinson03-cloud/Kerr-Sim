@@ -616,8 +616,8 @@ void main() {
         color = vec3(0.0, 1.0, 0.0);   // bright green = "MAX_STEPS hit", debug only
     }
     // luminance Reinhard (preserves hue) -> sRGB
-    float Lum = dot(color, vec3(0.2126, 0.7152, 0.0722));
-    if (Lum > 0.0) color *= (Lum / (1.0 + Lum)) / Lum;
+    //float Lum = dot(color, vec3(0.2126, 0.7152, 0.0722));
+    //if (Lum > 0.0) color *= (Lum / (1.0 + Lum)) / Lum;
     color = sRGB_encode(color);
     fragColor = vec4(color, 1.0);
     }

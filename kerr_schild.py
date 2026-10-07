@@ -650,8 +650,8 @@ void main() {
         return;
     }
     // luminance Reinhard (preserves hue) -> sRGB
-    float Lum = dot(color, vec3(0.2126, 0.7152, 0.0722));
-    if (Lum > 0.0) color *= (Lum / (1.0 + Lum)) / Lum;
+    //float Lum = dot(color, vec3(0.2126, 0.7152, 0.0722));
+    //if (Lum > 0.0) color *= (Lum / (1.0 + Lum)) / Lum;
     color = sRGB_encode(color);
     fragColor = vec4(color, 1.0);
     }
@@ -761,11 +761,11 @@ def main():
     M_val = 1.0
     a_val = 0.9
     #r_camera = 50.0
-    fov_deg = 25.0
+    fov_deg = 40.0
     theta_camera = math.radians(163.0)   # just above the equatorial plane
     phi_camera  = math.radians(30.0)
     T_peak = 3000.0 
-    WIDTH, HEIGHT = 600, 600
+    WIDTH, HEIGHT = 800, 600
 
     if not glfw.init():
         raise RuntimeError("glfw init failed")
